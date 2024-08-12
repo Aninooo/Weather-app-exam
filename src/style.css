@@ -16,21 +16,27 @@
 .search-input {
   width: 60%;
   padding: 0.5rem;
-  margin-right: 1rem;
+  margin-right: 0; 
+  border: 1px solid #ccc; 
+  box-sizing: border-box; 
 }
 
 .search-button {
   padding: 0.5rem 1rem;
-  background-color: #4a90e2;
+  background-color: red;
   color: white;
   border: none;
-  border-radius: 0.25rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
+  margin-left: 0; 
+  padding: 9px 15px 9px 15px;
 
+}
+.search-bar {
+  align-items: center; 
+}
 .search-button:hover {
-  background-color: #357dbf;
+  background-color: darkred;
 }
 
 .weather {
