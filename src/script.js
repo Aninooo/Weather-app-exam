@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
-const apikey = "feff206daa60b539abe8fae8f2ab7f29";
-const geoapifyApiKey = "13e0991b3cf04fda98e7ea20bd8a1b9b";
+const apikey = 'feff206daa60b539abe8fae8f2ab7f29';
+const geoapifyApiKey = '13e0991b3cf04fda98e7ea20bd8a1b9b';
 
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
-      cityQuery: "",
+      cityQuery: '',
       weatherData: null,
       dailyForecast: [],
       places: [],
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     async searchByCity() {
-      if (!this.cityQuery.trim()) return;
+      if (!this.cityQuery.trim()) {return;}
       this.loading = true;
 
       try {
@@ -37,7 +37,7 @@ export default {
         await this.fetchForecast(this.cityQuery);
         await this.fetchPlaces(this.cityQuery);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
         this.weatherData = null;
       } finally {
         this.loading = false;
@@ -57,7 +57,7 @@ export default {
             description: item.weather[0].description,
           }));
       } catch (error) {
-        console.error("Error fetching forecast data:", error);
+        console.error('Error fetching forecast data:', error);
       }
     },
     async fetchPlaces(city) {
@@ -67,10 +67,10 @@ export default {
         this.places = placesResponse.data.features.map((feature) => ({
           name: feature.properties.name,
           address: feature.properties.formatted,
-          category: feature.properties.category || "Unknown",
+          category: feature.properties.category || 'Unknown',
         }));
       } catch (error) {
-        console.error("Error fetching places data:", error);
+        console.error('Error fetching places data:', error);
       }
     },
   },
