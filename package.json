@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^1.7.3",
     "core-js": "^3.8.3",
+    "crypto-browserify": "^3.12.0",
     "dotenv": "^16.4.5",
     "vue": "^3.2.13"
   },
@@ -23,7 +24,8 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.35.0",
-    "eslint-plugin-vue": "^8.7.1"
+    "eslint-plugin-vue": "^8.7.1",
+    "nodemon": "^3.1.4"
   },
   "eslintConfig": {
     "root": true,
@@ -44,5 +46,10 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "description": "- **Simple and Clean Design**: The UI features a straightforward, intuitive layout with clear navigation elements. The header and search bar are prominently positioned, allowing users to quickly access and search for city weather information.\r - **Responsive Design**: The design adjusts smoothly to various screen sizes. Whether on a desktop or mobile device, the layout remains functional and user-friendly, providing a consistent experience across all devices.\r - **Visual Feedback**: Clear visual cues such as loading indicators and error messages keep users informed about the status of their actions. This helps users understand what’s happening and easily identify any issues.",
+  "main": "babel.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

@@ -45,11 +45,6 @@
   text-align: center;
 }
 
-.info {
- border: solid;
- border-color: #e4e1e1;
-}
-
 .temp-box {
   display: flex;
   justify-content: center;
@@ -96,7 +91,7 @@
 .real-feel-data {
   display: flex;
   flex-direction: column;
-
+  margin-left: 20px;
   gap: 0.5rem; 
 }
 
@@ -127,9 +122,6 @@
   border-bottom: 1px solid #ccc;
 }
 
-.description-1 p:last-child, .description-2 p:last-child {
-  border-bottom: none;
-}
 .welcome-message{
   text-align: center;
   font-size: 20px;

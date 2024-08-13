@@ -29,23 +29,17 @@
             <div class="real-feel-data">
               <p class="description">{{ weatherData.weather[0].description }}</p>
               <p class="real-feel">RealFeel® {{ realFeel }} °C</p>
-              <p class="real-feel-shade">RealFeel Shade™ {{ realFeelShade }}</p>
             </div>
           </div>
           <div class="flexbox">
             <div class="description-1">
-              <p class="uv-index">Max UV Index: {{ uvIndex }}</p>
               <p class="wind">Wind: {{ windSpeed }} km/h</p>
-              <p class="wind-gusts">Wind Gusts: {{ windGusts }} km/h</p>
               <p class="humidity">Humidity: {{ humidity }}%</p>
-              <p class="indoor-humidity">Indoor Humidity: {{ indoorHumidity }}</p>
             </div>
             <div class="description-2">
-              <p class="dew-point">Dew Point: {{ dewPoint }} °C</p>
               <p class="pressure">Pressure: {{ pressure }} mb</p>
               <p class="cloud-cover">Cloud Cover: {{ cloudCover }}%</p>
               <p class="visibility">Visibility: {{ visibility }} km</p>
-              <p class="cloud-ceiling">Cloud Ceiling: {{ cloudCeiling }} m</p>
             </div>
           </div>
         </div>
@@ -88,12 +82,12 @@
     </main>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 
-const apikey = "feff206daa60b539abe8fae8f2ab7f29";
-const geoapifyApiKey = "13e0991b3cf04fda98e7ea20bd8a1b9b";
+const apikey = process.env.VUE_APP_OPENWEATHERMAP_API_KEY;
+const geoapifyApiKey = process.env.VUE_APP_GEOAPIFY_API_KEY;
+
 
 export default {
   name: "App",
@@ -117,30 +111,16 @@ export default {
         ? Math.floor(this.weatherData.main.feels_like)
         : null;
     },
-    realFeelShade() {
-      if (this.weatherData && this.weatherData.main && this.weatherData.main.feels_like_shade) {
-        const value = Math.floor(this.weatherData.main.feels_like_shade);
-        return isNaN(value) ? "Unknown" : `${value}°C`;
-      }
-      return "Unknown";
-    },
-    uvIndex() {
-      return this.weatherData && this.weatherData.main.uv_index ? this.weatherData.main.uv_index : null;
+    iconUrl() {
+      return this.weatherData
+        ? `http://openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
+        : null;
     },
     windSpeed() {
       return this.weatherData && this.weatherData.wind.speed ? Math.floor(this.weatherData.wind.speed * 3.6) : null;
     },
-    windGusts() {
-      return this.weatherData && this.weatherData.wind.gust ? Math.floor(this.weatherData.wind.gust * 3.6) : null;
-    },
     humidity() {
       return this.weatherData ? this.weatherData.main.humidity : null;
-    },
-    indoorHumidity() {
-      return this.weatherData && this.weatherData.main.indoor_humidity ? this.weatherData.main.indoor_humidity : "Unknown";
-    },
-    dewPoint() {
-      return this.weatherData && this.weatherData.main.dew_point ? Math.floor(this.weatherData.main.dew_point) : null;
     },
     pressure() {
       return this.weatherData ? this.weatherData.main.pressure : null;
@@ -150,14 +130,6 @@ export default {
     },
     visibility() {
       return this.weatherData && this.weatherData.visibility ? this.weatherData.visibility / 1000 : null;
-    },
-    cloudCeiling() {
-      return this.weatherData && this.weatherData.clouds ? this.weatherData.clouds.ceiling : "Unknown";
-    },
-    iconUrl() {
-      return this.weatherData
-        ? `http://openweathermap.org/img/w/${this.weatherData.weather[0].icon}.png`
-        : null;
     },
   },
   methods: {
@@ -223,5 +195,4 @@ export default {
   },
 };
 </script>
-
 <style src="./style.css" scoped></style>

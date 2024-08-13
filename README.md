@@ -23,7 +23,6 @@
 This application provides weather information for cities in Japan. The data includes:
 
 - **RealFeel® Temperature**: The apparent temperature, considering various factors.
-- **RealFeel Shade™ Temperature**: The apparent temperature in shaded areas, if available.
 - **Max UV Index**: The maximum UV index forecast.
 - **Wind**: Current wind speed.
 - **Wind Gusts**: Current wind gusts, if available.
