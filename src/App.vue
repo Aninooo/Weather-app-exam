@@ -92,8 +92,8 @@
 <script>
 import axios from "axios";
 
-const apikey = process.env.OPENWEATHERMAP_API_KEY;
-const geoapifyApiKey = process.env.GEOAPIFY_API_KEY;
+const apikey = "feff206daa60b539abe8fae8f2ab7f29";
+const geoapifyApiKey = "13e0991b3cf04fda98e7ea20bd8a1b9b";
 
 export default {
   name: "App",
