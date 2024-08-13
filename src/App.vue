@@ -27,7 +27,7 @@
             <img :src="iconUrl" alt="Weather Icon" class="weather-icon" />
             <p class="temperature">{{ temperature }} °C</p>
             <div class="real-feel-data">
-              <p class="description">{{ weatherData.weather[0].description }}</p>
+              <p class="description">{{ weatherDescription }}</p>
               <p class="real-feel">RealFeel® {{ realFeel }} °C</p>
             </div>
           </div>
@@ -43,6 +43,49 @@
             </div>
           </div>
         </div>
+
+        <!-- Upcoming Forecast -->
+        <div v-if="hourlyForecast.length" class="forecast">
+          <div class="cast-header">Upcoming Forecast</div>
+          <div class="forecast-list">
+            <div class="next" v-for="(forecast, index) in hourlyForecast" :key="index">
+              <div>
+                <p class="time">{{ forecast.time }}</p>
+                <p class="temp-max">{{ forecast.temp_max }} °C</p>
+                <p class="temp-min">{{ forecast.temp_min }} °C</p>
+              </div>
+              <p class="desc">{{ forecast.description }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 4-Day Forecast -->
+        <div v-if="dailyForecast.length" class="forecast">
+          <div class="cast-header">Next 4 Days Forecast</div>
+          <div class="divider"></div>
+          <div class="forecast-list">
+            <div class="day" v-for="(forecast, index) in dailyForecast" :key="index">
+              <p class="date">{{ forecast.date }}</p>
+              <p class="temp-max">{{ forecast.temp_max }} °C</p>
+              <p class="temp-min">{{ forecast.temp_min }} °C</p>
+              <p class="desc">{{ forecast.description }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Places -->
+        <div v-if="places.length" class="places">
+          <h3>Places to Visit in {{ cityQuery }}</h3>
+          <ul>
+            <li v-for="(place, index) in places" :key="index">
+              <strong>{{ place.name }}</strong><br />
+              <em>{{ place.category }}</em><br />
+              <span>{{ place.address }}</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <!-- Error Message -->
@@ -52,42 +95,18 @@
 
       <!-- Loading State -->
       <div v-if="loading" class="loading">Loading...</div>
-
-      <!-- Forecast -->
-      <div v-if="dailyForecast.length" class="forecast">
-        <div class="cast-header">Next 4 days forecast</div>
-        <div class="forecast-list">
-          <div class="day" v-for="(forecast, index) in dailyForecast" :key="index">
-            <p class="date">{{ forecast.date }}</p>
-            <p class="temp-max">{{ forecast.temp_max }} °C</p>
-            <p class="temp-min">{{ forecast.temp_min }} °C</p>
-            <p class="desc">{{ forecast.description }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <!-- Places -->
-      <div v-if="places.length" class="places">
-        <h3>Places to Visit in {{ cityQuery }}</h3>
-        <ul>
-          <li v-for="(place, index) in places" :key="index">
-            <strong>{{ place.name }}</strong><br />
-            <em>{{ place.category }}</em><br />
-            <span>{{ place.address }}</span>
-          </li>
-        </ul>
-      </div>
+      
     </main>
+    
   </div>
+  
 </template>
+
 <script>
 import axios from "axios";
 
 const apikey = process.env.VUE_APP_OPENWEATHERMAP_API_KEY;
 const geoapifyApiKey = process.env.VUE_APP_GEOAPIFY_API_KEY;
-
 
 export default {
   name: "App",
@@ -95,11 +114,24 @@ export default {
     return {
       cityQuery: "",
       weatherData: null,
+      hourlyForecast: [],
       dailyForecast: [],
       places: [],
       loading: false,
       showWelcomeMessage: true,
       error: false,
+      weatherDescriptions: {
+        "clear sky": "clear sky: No clouds in the sky.",
+        "few clouds": "A few clouds are present, but it's mostly clear.",
+        "scattered clouds": "Clouds are scattered across the sky.",
+        "broken clouds": "The sky is mostly covered by clouds, and it might rain.",
+        "overcast clouds": "The sky is completely covered by clouds, and rain is likely.",
+        "shower rain": "Expect short, intense rain showers.",
+        "rain": "Continuous rain is expected.",
+        "thunderstorm": "Thunderstorms are likely.",
+        "snow": "Snowfall is expected.",
+        "mist": "Visibility is reduced due to mist.",
+      },
     };
   },
   computed: {
@@ -131,6 +163,10 @@ export default {
     visibility() {
       return this.weatherData && this.weatherData.visibility ? this.weatherData.visibility / 1000 : null;
     },
+    weatherDescription() {
+      const description = this.weatherData?.weather[0]?.description.toLowerCase();
+      return this.weatherDescriptions[description] || `No description available for: ${description}`;
+    },
   },
   methods: {
     async searchByCity() {
@@ -149,6 +185,7 @@ export default {
           this.weatherData = null;
           this.error = true;
           this.dailyForecast = [];
+          this.hourlyForecast = [];
           this.places = [];
         } else {
           await this.fetchForecast(this.cityQuery);
@@ -167,6 +204,14 @@ export default {
       try {
         const forecastResponse = await axios.get(forecastUrl);
         const forecast = forecastResponse.data;
+
+        this.hourlyForecast = forecast.list.slice(0, 5).map(item => ({
+          time: new Date(item.dt * 1000).toLocaleTimeString(),
+          temp_max: Math.floor(item.main.temp_max),
+          temp_min: Math.floor(item.main.temp_min),
+          description: item.weather[0].description,
+        }));
+
         this.dailyForecast = forecast.list
           .filter((item, index) => index % 8 === 0)
           .map((item) => ({
