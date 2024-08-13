@@ -28,7 +28,7 @@
   color: white;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.60s ease;
   margin-left: 0; 
   padding: 9px 15px 9px 15px;
 }
@@ -44,7 +44,6 @@
 .weather {
   text-align: center;
 }
-
 .temp-box {
   display: flex;
   justify-content: center;
@@ -80,6 +79,7 @@
 .forecast-list {
   display: flex;
   justify-content: space-between;
+  background-color: rgb(252, 244, 244);
 }
 
 .day {
@@ -93,11 +93,6 @@
   margin-top: 2rem;
 }
 
-.divider {
-  height: 2px;
-  background-color: #ddd;
-  margin: 2rem 0;
-}
 
 .real-feel-data {
   display: flex;

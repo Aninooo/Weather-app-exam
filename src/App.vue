@@ -17,9 +17,9 @@
       <div v-if="showWelcomeMessage" class="welcome-message">
         <p>Welcome to the Japan Travel Weather App! <br>Enter a city to get the latest weather information and travel suggestions.</p>
       </div>
-
-      <!-- Weather Data -->
-      <div v-if="weatherData" class="weather">
+<div class="middle-section">
+    <!-- Weather Data -->
+    <div v-if="weatherData" class="weather">
         <h2>{{ weatherData.name }}, {{ weatherData.sys.country }}</h2>
 
         <div class="info">
@@ -44,6 +44,8 @@
           </div>
         </div>
 
+</div>
+  
         <!-- Upcoming Forecast -->
         <div v-if="hourlyForecast.length" class="forecast">
           <div class="cast-header">Upcoming Forecast</div>
