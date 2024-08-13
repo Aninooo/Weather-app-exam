@@ -23,13 +23,8 @@
 This application provides weather information for cities in Japan. The data includes:
 
 - **RealFeel® Temperature**: The apparent temperature, considering various factors.
-- **Max UV Index**: The maximum UV index forecast.
 - **Wind**: Current wind speed.
-- **Wind Gusts**: Current wind gusts, if available.
 - **Humidity**: Current relative humidity.
-- **Indoor Humidity**: Indoor humidity, if available.
-- **Dew Point**: The dew point temperature.
 - **Pressure**: Atmospheric pressure.
 - **Cloud Cover**: Percentage of cloud cover.
 - **Visibility**: Visibility in kilometers.
-- **Cloud Ceiling**: Height of the cloud ceiling, if available.
