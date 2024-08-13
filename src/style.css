@@ -46,7 +46,8 @@
 }
 
 .info {
- 
+ border: solid;
+ border-color: #e4e1e1;
 }
 
 .temp-box {
@@ -57,8 +58,8 @@
 }
 
 .weather-icon {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   margin-right: 1rem;
 }
 
@@ -128,4 +129,8 @@
 
 .description-1 p:last-child, .description-2 p:last-child {
   border-bottom: none;
+}
+.welcome-message{
+  text-align: center;
+  font-size: 20px;
 }
