@@ -18,3 +18,19 @@
 - **Efficient Data Fetching**: The `axios` library is used for API requests to retrieve weather and place information. Error handling and loading states are managed effectively to ensure a smooth user experience even if data fetching encounters issues.
 - **Integration of Geoapify**: Geoapify is used for retrieving place information, providing accurate and relevant data about locations. This choice enhances the reliability and performance of the application, as it avoids deprecated APIs.
 
+## Features
+
+This application provides weather information for cities in Japan. The data includes:
+
+- **RealFeel® Temperature**: The apparent temperature, considering various factors.
+- **RealFeel Shade™ Temperature**: The apparent temperature in shaded areas, if available.
+- **Max UV Index**: The maximum UV index forecast.
+- **Wind**: Current wind speed.
+- **Wind Gusts**: Current wind gusts, if available.
+- **Humidity**: Current relative humidity.
+- **Indoor Humidity**: Indoor humidity, if available.
+- **Dew Point**: The dew point temperature.
+- **Pressure**: Atmospheric pressure.
+- **Cloud Cover**: Percentage of cloud cover.
+- **Visibility**: Visibility in kilometers.
+- **Cloud Ceiling**: Height of the cloud ceiling, if available.
